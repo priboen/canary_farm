@@ -36,7 +36,7 @@ class Button extends StatelessWidget {
     this.fontSize = 18.0,
   });
 
-  final Function() onPressed;
+  final VoidCallback? onPressed; // <-- nullable
   final String label;
   final ButtonStyleType style;
   final Color color;
