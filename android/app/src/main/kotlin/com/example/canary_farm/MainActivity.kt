@@ -1,0 +1,5 @@
+package com.example.canary_farm
+
+import io.flutter.embedding.android.FlutterActivity
+
+class MainActivity : FlutterActivity()
