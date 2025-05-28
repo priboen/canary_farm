@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:canary_farm/data/models/request/auth/login_request_model.dart';
+import 'package:canary_farm/data/models/request/auth/register_request_model.dart';
 import 'package:canary_farm/data/models/response/auth_response_model.dart';
 import 'package:canary_farm/services/service_http_client.dart';
 import 'package:dartz/dartz.dart';
@@ -37,6 +38,29 @@ class AuthRepository {
     } catch (e) {
       log("Error in login: $e");
       return Left("An error occurred while logging in.");
+    }
+  }
+
+  Future<Either<String, String>> register(
+    RegisterRequestModel requestModel,
+  ) async {
+    try {
+      final response = await _serviceHttpClient.post(
+        "register",
+        requestModel.toMap(),
+      );
+      final jsonResponse = json.decode(response.body);
+      if (response.statusCode == 201) {
+        final registerResponse = jsonResponse['message'] as String;
+        log("Registration successful: ${registerResponse}");
+        return Right(registerResponse);
+      } else {
+        log("Registration failed: ${jsonResponse['message']}");
+        return Left(jsonResponse['message'] ?? "Registration failed");
+      }
+    } catch (e) {
+      log("Error in registration: $e");
+      return Left("An error occurred while registering.");
     }
   }
 }
