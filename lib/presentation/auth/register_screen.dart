@@ -1,7 +1,10 @@
 import 'package:canary_farm/core/core.dart';
+import 'package:canary_farm/data/models/request/auth/register_request_model.dart';
+import 'package:canary_farm/presentation/auth/bloc/register/register_bloc.dart';
 import 'package:canary_farm/presentation/auth/login_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -13,7 +16,6 @@ class RegisterScreen extends StatefulWidget {
 class _RegisterScreenState extends State<RegisterScreen> {
   late final TextEditingController namaController;
   late final TextEditingController emailController;
-  late final TextEditingController phoneController;
   late final TextEditingController passwordController;
   late final GlobalKey<FormState> _key;
   bool isShowPassword = false;
@@ -21,7 +23,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   void initState() {
     namaController = TextEditingController();
-    phoneController = TextEditingController();
     emailController = TextEditingController();
     passwordController = TextEditingController();
     _key = GlobalKey<FormState>();
@@ -107,7 +108,48 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ],
                 ),
                 const SpaceHeight(50),
-                Button.filled(onPressed: () {}, label: 'Daftar'),
+                BlocConsumer<RegisterBloc, RegisterState>(
+                  listener: (context, state) {
+                    if (state is RegisterSuccess) {
+                      context.pushAndRemoveUntil(
+                        const LoginScreen(),
+                        (route) => false,
+                      );
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(state.message),
+                          backgroundColor: AppColors.primary,
+                        ),
+                      );
+                    } else if (state is RegisterFailure) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(state.error),
+                          backgroundColor: AppColors.red,
+                        ),
+                      );
+                    }
+                  },
+                  builder: (context, state) {
+                    return Button.filled(
+                      onPressed: state is RegisterLoading
+                          ? null
+                          : () {
+                              if (_key.currentState!.validate()) {
+                                final request = RegisterRequestModel(
+                                  username: namaController.text,
+                                  email: emailController.text,
+                                  password: passwordController.text,
+                                );
+                                context.read<RegisterBloc>().add(
+                                  RegisterRequested(requestModel: request),
+                                );
+                              }
+                            },
+                      label: state is RegisterLoading ? 'Memuat...' : 'Masuk',
+                    );
+                  },
+                ),
                 const SpaceHeight(20),
                 Text.rich(
                   TextSpan(
