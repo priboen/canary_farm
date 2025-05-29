@@ -1,4 +1,6 @@
+import 'package:canary_farm/core/core.dart';
 import 'package:canary_farm/data/models/response/buyer/buyer_profile_response_model.dart';
+import 'package:canary_farm/presentation/buyer/home/buyer_home_screen.dart';
 import 'package:flutter/material.dart';
 
 class ProfileViewBuyer extends StatelessWidget {
@@ -14,15 +16,34 @@ class ProfileViewBuyer extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("Nama: ${profile.name}"),
-            Text("Alamat: ${profile.address}"),
-            Text("No HP: ${profile.phone}"),
+            Text(
+              "Nama: ${profile.name}",
+              style: TextStyle(
+                fontSize: MediaQuery.of(context).size.width * 0.05,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Text(
+              "Alamat: ${profile.address}",
+              style: TextStyle(
+                fontSize: MediaQuery.of(context).size.width * 0.04,
+              ),
+            ),
+            Text(
+              "No HP: ${profile.phone}",
+              style: TextStyle(
+                fontSize: MediaQuery.of(context).size.width * 0.04,
+              ),
+            ),
             const SizedBox(height: 16),
-            ElevatedButton(
+            TextButton(
               onPressed: () {
-                // Misal bisa buat navigasi ke edit profile
+                context.pushAndRemoveUntil(
+                  const BuyerHomeScreen(),
+                  (route) => false,
+                );
               },
-              child: Text("Edit Profil"),
+              child: const Text("Go to Home"),
             ),
           ],
         ),
