@@ -1,7 +1,7 @@
 import 'package:canary_farm/data/repository/auth_repository.dart';
 import 'package:canary_farm/presentation/auth/bloc/login/login_bloc.dart';
 import 'package:canary_farm/presentation/auth/bloc/register/register_bloc.dart';
-import 'package:canary_farm/presentation/auth/login_screen.dart';
+import 'package:canary_farm/presentation/pages/splashscreen.dart';
 import 'package:canary_farm/services/service_http_client.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         ),
-        home: const LoginScreen(),
+        home: const Splashscreen(),
       ),
     );
   }
