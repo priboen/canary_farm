@@ -1,4 +1,7 @@
+import 'package:canary_farm/core/components/spaces.dart';
+import 'package:canary_farm/core/extensions/build_context_ext.dart';
 import 'package:canary_farm/data/models/response/buyer/burung_semua_tersedia_model.dart';
+import 'package:canary_farm/presentation/auth/login_screen.dart';
 import 'package:canary_farm/presentation/buyer/home/bloc/get_burung_tersedia_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -21,18 +24,42 @@ class _BuyerHomeScreenState extends State<BuyerHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-
       appBar: AppBar(
         title: const Text("Home Screen"),
         centerTitle: true,
-        backgroundColor: Colors.white,
+
         actions: [
           IconButton(
-            icon: const Icon(Icons.refresh),
+            icon: const Icon(Icons.logout, color: Colors.black),
+            //pakai loading
             onPressed: () {
-              context.read<GetBurungTersediaBloc>().add(
-                GetAllBurungTersediaEvent(),
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return CupertinoAlertDialog(
+                    title: const Text("Konfirmasi"),
+                    content: const Text("Apakah Anda yakin ingin keluar?"),
+                    actions: [
+                      CupertinoDialogAction(
+                        child: const Text("Batal"),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                      CupertinoDialogAction(
+                        child: const Text("Keluar"),
+                        onPressed: () {
+                          Navigator.of(context).pushAndRemoveUntil(
+                            MaterialPageRoute(
+                              builder: (context) => const LoginScreen(),
+                            ),
+                            (route) => false,
+                          );
+                        },
+                      ),
+                    ],
+                  );
+                },
               );
             },
           ),
@@ -40,7 +67,7 @@ class _BuyerHomeScreenState extends State<BuyerHomeScreen> {
       ),
       body: Column(
         children: [
-          const SizedBox(height: 10),
+          const SpaceHeight(10),
           const Padding(
             padding: EdgeInsets.all(16.0),
             child: Text(
@@ -48,7 +75,7 @@ class _BuyerHomeScreenState extends State<BuyerHomeScreen> {
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
           ),
-          const SizedBox(height: 10),
+          const SpaceHeight(10),
           //search bar
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
