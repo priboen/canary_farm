@@ -15,7 +15,7 @@ class PostBurungRepository {
   ) async {
     try {
       final response = await _serviceHttpClient.postWihToken(
-        "admin/anak",
+        "admin/posting-jual",
         requestModel.toJson(),
       );
 
