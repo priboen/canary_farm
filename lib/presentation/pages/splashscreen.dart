@@ -17,7 +17,7 @@ class _SplashscreenState extends State<Splashscreen> {
   @override
   Widget build(BuildContext context) {
     Future.delayed(const Duration(seconds: 3), () async {
-      final token = await await _storage.read(key: 'authToken');
+      final token = await _storage.read(key: 'authToken');
       if (token != null) {
         final role = await _storage.read(key: 'userRole');
         if (role?.toLowerCase() == 'admin') {
