@@ -3,7 +3,7 @@ import 'dart:convert';
 class BurungSemuaTersediaModel {
   final String message;
   final int statusCode;
-  final List<DataBurungTersedua> data;
+  final List<DataBurungTersedia> data;
 
   BurungSemuaTersediaModel({
     required this.message,
@@ -14,7 +14,7 @@ class BurungSemuaTersediaModel {
   BurungSemuaTersediaModel copyWith({
     String? message,
     int? statusCode,
-    List<DataBurungTersedua>? data,
+    List<DataBurungTersedia>? data,
   }) => BurungSemuaTersediaModel(
     message: message ?? this.message,
     statusCode: statusCode ?? this.statusCode,
@@ -30,8 +30,8 @@ class BurungSemuaTersediaModel {
       BurungSemuaTersediaModel(
         message: json["message"],
         statusCode: json["status_code"],
-        data: List<DataBurungTersedua>.from(
-          json["data"].map((x) => DataBurungTersedua.fromJson(x)),
+        data: List<DataBurungTersedia>.from(
+          json["data"].map((x) => DataBurungTersedia.fromJson(x)),
         ),
       );
 
@@ -42,7 +42,7 @@ class BurungSemuaTersediaModel {
   };
 }
 
-class DataBurungTersedua {
+class DataBurungTersedia {
   final int id;
   final String image;
   final String noRing;
@@ -53,7 +53,7 @@ class DataBurungTersedua {
   final String deskripsi;
   final String status;
 
-  DataBurungTersedua({
+  DataBurungTersedia({
     required this.id,
     required this.image,
     required this.noRing,
@@ -65,7 +65,7 @@ class DataBurungTersedua {
     required this.status,
   });
 
-  DataBurungTersedua copyWith({
+  DataBurungTersedia copyWith({
     int? id,
     String? image,
     String? noRing,
@@ -75,7 +75,7 @@ class DataBurungTersedua {
     int? harga,
     String? deskripsi,
     String? status,
-  }) => DataBurungTersedua(
+  }) => DataBurungTersedia(
     id: id ?? this.id,
     image: image ?? this.image,
     noRing: noRing ?? this.noRing,
@@ -87,13 +87,13 @@ class DataBurungTersedua {
     status: status ?? this.status,
   );
 
-  factory DataBurungTersedua.fromRawJson(String str) =>
-      DataBurungTersedua.fromJson(json.decode(str));
+  factory DataBurungTersedia.fromRawJson(String str) =>
+      DataBurungTersedia.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory DataBurungTersedua.fromJson(Map<String, dynamic> json) =>
-      DataBurungTersedua(
+  factory DataBurungTersedia.fromJson(Map<String, dynamic> json) =>
+      DataBurungTersedia(
         id: json["id"],
         image: json["image"],
         noRing: json["no_ring"],
