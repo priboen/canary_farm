@@ -28,7 +28,7 @@ class IndukRepository {
         return Left(errorMessage['message'] ?? 'Unknown error occurred');
       }
     } catch (e) {
-      return Left("An error occurred while adding profile: $e");
+      return Left("An error occurred while adding induk: $e");
     }
   }
 
@@ -45,7 +45,7 @@ class IndukRepository {
         return Left(errorMessage['message'] ?? 'Unknown error occurred');
       }
     } catch (e) {
-      return Left("An error occurred while adding profile: $e");
+      return Left("An error occurred while getting all induk: $e");
     }
   }
 }

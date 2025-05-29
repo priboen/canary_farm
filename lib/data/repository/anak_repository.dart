@@ -45,7 +45,7 @@ class AnakRepository {
         return Left(errorMessage['message'] ?? 'Unknown error occurred');
       }
     } catch (e) {
-      return Left("An error occurred while adding profile: $e");
+      return Left("An error occurred while get all anak: $e");
     }
   }
 }

@@ -51,27 +51,23 @@ class GetAnakById {
     required this.data,
   });
 
-  GetAnakById copyWith({
-    String? message,
-    int? statusCode,
-    GetAnak? data,
-  }) => GetAnakById(
-    message: message ?? this.message,
-    statusCode: statusCode ?? this.statusCode,
-    data: data ?? this.data,
-  );
+  GetAnakById copyWith({String? message, int? statusCode, GetAnak? data}) =>
+      GetAnakById(
+        message: message ?? this.message,
+        statusCode: statusCode ?? this.statusCode,
+        data: data ?? this.data,
+      );
 
   factory GetAnakById.fromRawJson(String str) =>
       GetAnakById.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory GetAnakById.fromJson(Map<String, dynamic> json) =>
-      GetAnakById(
-        message: json["message"],
-        statusCode: json["status_code"],
-        data: GetAnak.fromJson(json["data"]),
-      );
+  factory GetAnakById.fromJson(Map<String, dynamic> json) => GetAnakById(
+    message: json["message"],
+    statusCode: json["status_code"],
+    data: GetAnak.fromJson(json["data"]),
+  );
 
   Map<String, dynamic> toJson() => {
     "message": message,
@@ -128,12 +124,13 @@ class GetAnak {
   factory GetAnak.fromJson(Map<String, dynamic> json) => GetAnak(
     id: json["id"],
     noRing: json["no_ring"],
-    gambarBurung: json["gambar_burung"],
+    gambarBurung:
+        json["gambar_burung"] ?? '', // default to empty string if null
     tanggalLahir: DateTime.parse(json["tanggal_lahir"]),
     jenisKelamin: json["jenis_kelamin"],
     jenisKenari: json["jenis_kenari"],
-    ayahNoRing: json["ayah_no_ring"],
-    ibuNoRing: json["ibu_no_ring"],
+    ayahNoRing: json["ayah_no_ring"] ?? '', // default to empty string if null
+    ibuNoRing: json["ibu_no_ring"] ?? '', // default to empty string if null
   );
 
   Map<String, dynamic> toJson() => {

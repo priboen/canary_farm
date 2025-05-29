@@ -11,27 +11,23 @@ class GetIndukById {
     required this.data,
   });
 
-  GetIndukById copyWith({
-    String? message,
-    int? statusCode,
-    GetInduk? data,
-  }) => GetIndukById(
-    message: message ?? this.message,
-    statusCode: statusCode ?? this.statusCode,
-    data: data ?? this.data,
-  );
+  GetIndukById copyWith({String? message, int? statusCode, GetInduk? data}) =>
+      GetIndukById(
+        message: message ?? this.message,
+        statusCode: statusCode ?? this.statusCode,
+        data: data ?? this.data,
+      );
 
   factory GetIndukById.fromRawJson(String str) =>
       GetIndukById.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory GetIndukById.fromJson(Map<String, dynamic> json) =>
-      GetIndukById(
-        message: json["message"],
-        statusCode: json["status_code"],
-        data: GetInduk.fromJson(json["data"]),
-      );
+  factory GetIndukById.fromJson(Map<String, dynamic> json) => GetIndukById(
+    message: json["message"],
+    statusCode: json["status_code"],
+    data: GetInduk.fromJson(json["data"]),
+  );
 
   Map<String, dynamic> toJson() => {
     "message": message,
@@ -88,8 +84,8 @@ class GetInduk {
   final DateTime tanggalLahir;
   final String jenisKelamin;
   final String jenisKenari;
-  final String keterangan;
-  final String gambarBurung;
+  final String? keterangan;
+  final String? gambarBurung;
 
   GetInduk({
     required this.id,
@@ -130,7 +126,7 @@ class GetInduk {
     tanggalLahir: DateTime.parse(json["tanggal_lahir"]),
     jenisKelamin: json["jenis_kelamin"],
     jenisKenari: json["jenis_kenari"],
-    keterangan: json["keterangan"],
+    keterangan: json["keterangan"] ?? "",
     gambarBurung: json["gambar_burung"] ?? "",
   );
 
