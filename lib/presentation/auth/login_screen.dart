@@ -105,6 +105,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           (route) => false,
                         );
                       } else if (role == 'buyer') {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text(state.responseModel.message!)),
+                        );
                         context.pushAndRemoveUntil(
                           const BuyerProfilePage(),
                           (route) => false,
