@@ -34,6 +34,24 @@ class MyApp extends StatelessWidget {
           create: (context) =>
               RegisterBloc(authRepository: AuthRepository(ServiceHttpClient())),
         ),
+        BlocProvider(
+          create: (context) =>
+              GetProfileBloc(AdminRepository(ServiceHttpClient())),
+        ),
+        BlocProvider(
+          create: (context) =>
+              AddProfileBloc(AdminRepository(ServiceHttpClient())),
+        ),
+        BlocProvider(
+          create: (context) => GetBurungTersediaBloc(
+            GetAllBurungTersediaRepository(ServiceHttpClient()),
+          ),
+        ),
+        BlocProvider(
+          create: (context) => ProfileBuyerBloc(
+            profileBuyerRepository: ProfileBuyerRepository(ServiceHttpClient()),
+          ),
+        ),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
