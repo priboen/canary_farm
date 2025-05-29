@@ -45,7 +45,7 @@ class Data {
   String name;
   String address;
   String phone;
-  String photo;
+  String? photo;
 
   Data({
     required this.id,
@@ -78,7 +78,7 @@ class Data {
     name: json["name"],
     address: json["address"],
     phone: json["phone"],
-    photo: json["photo"],
+    photo: json["photo"] ?? "", // Handle null case for photo
   );
 
   Map<String, dynamic> toJson() => {

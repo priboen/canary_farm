@@ -47,30 +47,49 @@ class ProfileBuyerInputFormState extends State<ProfileBuyerInputForm> {
                       value!.isEmpty ? "Nomor HP tidak boleh kosong" : null,
                 ),
                 const SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: isLoading
-                      ? null
-                      : () {
-                          if (_formKey.currentState!.validate()) {
-                            final request = BuyerProfileRequestModel(
-                              name: nameController.text,
-                              address: addressController.text,
-                              phone: phoneController.text,
-                              photo: "",
-                            );
-                            context.read<ProfileBuyerBloc>().add(
-                              AddProfileBuyerEvent(requestModel: request),
-                            );
-                          }
-                        },
-                  child: isLoading
-                      ? CircularProgressIndicator(
-                          strokeWidth: 2,
-                          valueColor: AlwaysStoppedAnimation<Color>(
-                            Colors.white,
-                          ),
-                        )
-                      : Text("Simpan Profil"),
+                BlocConsumer<ProfileBuyerBloc, ProfileBuyerState>(
+                  listener: (context, state) {
+                    if (state is ProfileBuyerAdded) {
+                      // Refresh profile after adding
+                      context.read<ProfileBuyerBloc>().add(
+                        GetProfileBuyerEvent(),
+                      );
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text(state.profile.message)),
+                      );
+                    } else if (state is ProfileBuyerError) {
+                      ScaffoldMessenger.of(
+                        context,
+                      ).showSnackBar(SnackBar(content: Text(state.message)));
+                    }
+                  },
+                  builder: (context, state) {
+                    return ElevatedButton(
+                      onPressed: isLoading
+                          ? null
+                          : () {
+                              if (_formKey.currentState!.validate()) {
+                                final request = BuyerProfileRequestModel(
+                                  name: nameController.text,
+                                  address: addressController.text,
+                                  phone: phoneController.text,
+                                  photo: "",
+                                );
+                                context.read<ProfileBuyerBloc>().add(
+                                  AddProfileBuyerEvent(requestModel: request),
+                                );
+                              }
+                            },
+                      child: isLoading
+                          ? CircularProgressIndicator(
+                              strokeWidth: 2,
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                Colors.white,
+                              ),
+                            )
+                          : Text("Simpan Profil"),
+                    );
+                  },
                 ),
               ],
             ),
