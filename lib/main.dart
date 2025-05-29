@@ -35,22 +35,23 @@ class MyApp extends StatelessWidget {
               RegisterBloc(authRepository: AuthRepository(ServiceHttpClient())),
         ),
         BlocProvider(
-          create: (context) =>
-              GetProfileBloc(AdminRepository(ServiceHttpClient())),
+          create: (context) => ProfileBuyerBloc(
+            profileBuyerRepository: ProfileBuyerRepository(ServiceHttpClient()),
+          ),
         ),
-        BlocProvider(
-          create: (context) =>
-              AddProfileBloc(AdminRepository(ServiceHttpClient())),
-        ),
+
         BlocProvider(
           create: (context) => GetBurungTersediaBloc(
             GetAllBurungTersediaRepository(ServiceHttpClient()),
           ),
         ),
         BlocProvider(
-          create: (context) => ProfileBuyerBloc(
-            profileBuyerRepository: ProfileBuyerRepository(ServiceHttpClient()),
-          ),
+          create: (context) =>
+              AddProfileBloc(AdminRepository(ServiceHttpClient())),
+        ),
+        BlocProvider(
+          create: (context) =>
+              GetProfileBloc(AdminRepository(ServiceHttpClient())),
         ),
       ],
       child: MaterialApp(
