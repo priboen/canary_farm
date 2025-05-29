@@ -29,6 +29,10 @@ class AuthRepository {
           key: "authToken",
           value: loginResponse.user!.token,
         );
+        await secureStorage.write(
+          key: "userRole",
+          value: loginResponse.user!.role,
+        );
         log("Login successful: ${loginResponse.message}");
         return Right(loginResponse);
       } else {
