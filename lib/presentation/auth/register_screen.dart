@@ -146,7 +146,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 );
                               }
                             },
-                      label: state is RegisterLoading ? 'Memuat...' : 'Masuk',
+                      label: state is RegisterLoading ? 'Memuat...' : 'Daftar',
                     );
                   },
                 ),
