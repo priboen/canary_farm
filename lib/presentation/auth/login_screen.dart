@@ -1,6 +1,6 @@
 import 'package:canary_farm/core/core.dart';
 import 'package:canary_farm/data/models/request/auth/login_request_model.dart';
-import 'package:canary_farm/presentation/admin/admin_main_page.dart';
+import 'package:canary_farm/presentation/admin/profile/pages/admin_confirm_screen.dart';
 import 'package:canary_farm/presentation/auth/bloc/login/login_bloc.dart';
 import 'package:canary_farm/presentation/auth/register_screen.dart';
 import 'package:canary_farm/presentation/buyer/home/buyer_home_screen.dart';
@@ -100,7 +100,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ?.toLowerCase();
                       if (role == 'admin') {
                         context.pushAndRemoveUntil(
-                          const AdminMainPage(),
+                          const AdminConfirmScreen(),
                           (route) => false,
                         );
                       } else if (role == 'buyer') {
