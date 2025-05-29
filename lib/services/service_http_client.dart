@@ -34,8 +34,7 @@ class ServiceHttpClient {
       final response = await http.get(
         url,
         headers: {
-          if (token != null)
-            'Authorization': 'Bearer $token',
+          if (token != null) 'Authorization': 'Bearer $token',
           'Accept': 'application/json',
           'Content-Type': 'application/json',
         },
