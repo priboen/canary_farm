@@ -1,5 +1,7 @@
 import 'package:canary_farm/core/constants/constants.dart';
+import 'package:canary_farm/presentation/admin/canary/canary_screen.dart';
 import 'package:canary_farm/presentation/admin/home/admin_home_screen.dart';
+import 'package:canary_farm/presentation/admin/profile/pages/admin_profile_screen.dart';
 import 'package:flutter/material.dart';
 
 class AdminMainPage extends StatefulWidget {
@@ -13,9 +15,9 @@ class _AdminMainPageState extends State<AdminMainPage> {
   int _selectedIndex = 0;
   final _widgets = [
     const AdminHomeScreen(),
-    const Center(child: Text('Manajemen Kenari')),
+    const CanaryScreen(),
     const Center(child: Text('Posting')),
-    const Center(child: Text('Profile')),
+    const AdminProfileScreen(),
   ];
   @override
   Widget build(BuildContext context) {

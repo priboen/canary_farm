@@ -1,4 +1,8 @@
+import 'package:canary_farm/data/repository/admin_repository.dart';
 import 'package:canary_farm/data/repository/auth_repository.dart';
+import 'package:canary_farm/presentation/admin/profile/bloc/add_profile/add_profile_bloc.dart';
+import 'package:canary_farm/presentation/admin/profile/bloc/get_profile/get_profile_bloc.dart';
+import 'package:canary_farm/presentation/admin/profile/pages/admin_confirm_screen.dart';
 import 'package:canary_farm/data/repository/get_all_burung_tersedia_repository.dart';
 import 'package:canary_farm/data/repository/profile_buyer_repository.dart';
 import 'package:canary_farm/presentation/auth/bloc/login/login_bloc.dart';
@@ -31,14 +35,21 @@ class MyApp extends StatelessWidget {
               RegisterBloc(authRepository: AuthRepository(ServiceHttpClient())),
         ),
         BlocProvider(
-          create: (context) => ProfileBuyerBloc(
-            profileBuyerRepository: ProfileBuyerRepository(ServiceHttpClient()),
-          ),
+          create: (context) =>
+              GetProfileBloc(AdminRepository(ServiceHttpClient())),
         ),
-
+        BlocProvider(
+          create: (context) =>
+              AddProfileBloc(AdminRepository(ServiceHttpClient())),
+        ),
         BlocProvider(
           create: (context) => GetBurungTersediaBloc(
             GetAllBurungTersediaRepository(ServiceHttpClient()),
+          ),
+        ),
+        BlocProvider(
+          create: (context) => ProfileBuyerBloc(
+            profileBuyerRepository: ProfileBuyerRepository(ServiceHttpClient()),
           ),
         ),
       ],
