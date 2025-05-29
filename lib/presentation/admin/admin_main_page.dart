@@ -62,7 +62,7 @@ class _AdminMainPageState extends State<AdminMainPage> {
               BottomNavigationBarItem(
                 icon: Icon(
                   Icons.pets,
-                  color: _selectedIndex == 0
+                  color: _selectedIndex == 1
                       ? AppColors.primary
                       : AppColors.grey,
                 ),
@@ -71,16 +71,18 @@ class _AdminMainPageState extends State<AdminMainPage> {
               BottomNavigationBarItem(
                 icon: Icon(
                   Icons.post_add,
-                  color: _selectedIndex == 0
+                  color: _selectedIndex == 2
                       ? AppColors.primary
                       : AppColors.grey,
                 ),
                 label: 'Posting',
               ),
-                            BottomNavigationBarItem(
+              BottomNavigationBarItem(
                 icon: Icon(
                   Icons.person,
-                  color: _selectedIndex == 0 ? AppColors.primary : AppColors.grey,
+                  color: _selectedIndex == 3
+                      ? AppColors.primary
+                      : AppColors.grey,
                 ),
                 label: 'Profile',
               ),
