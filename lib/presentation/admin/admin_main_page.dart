@@ -1,5 +1,6 @@
 import 'package:canary_farm/core/constants/constants.dart';
-import 'package:canary_farm/presentation/admin/canary/canary_screen.dart';
+import 'package:canary_farm/presentation/admin/canary/anak/anak_canary_screen.dart';
+import 'package:canary_farm/presentation/admin/canary/induk_canary_screen.dart';
 import 'package:canary_farm/presentation/admin/home/admin_home_screen.dart';
 import 'package:canary_farm/presentation/admin/profile/pages/admin_profile_screen.dart';
 import 'package:flutter/material.dart';
@@ -15,9 +16,9 @@ class _AdminMainPageState extends State<AdminMainPage> {
   int _selectedIndex = 0;
   final _widgets = [
     const AdminHomeScreen(),
-    const CanaryScreen(),
+    const IndukCanaryScreen(),
+    const AnakCanaryScreen(),
     const Center(child: Text('Posting')),
-    const AdminProfileScreen(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -68,7 +69,7 @@ class _AdminMainPageState extends State<AdminMainPage> {
                       ? AppColors.primary
                       : AppColors.grey,
                 ),
-                label: 'Kenari',
+                label: 'Induk',
               ),
               BottomNavigationBarItem(
                 icon: Icon(
@@ -77,7 +78,7 @@ class _AdminMainPageState extends State<AdminMainPage> {
                       ? AppColors.primary
                       : AppColors.grey,
                 ),
-                label: 'Posting',
+                label: 'Anak',
               ),
               BottomNavigationBarItem(
                 icon: Icon(
@@ -86,7 +87,7 @@ class _AdminMainPageState extends State<AdminMainPage> {
                       ? AppColors.primary
                       : AppColors.grey,
                 ),
-                label: 'Profile',
+                label: 'Posting',
               ),
             ],
           ),

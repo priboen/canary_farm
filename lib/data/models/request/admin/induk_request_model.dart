@@ -6,7 +6,7 @@ class IndukRequestModel {
   final String jenisKelamin;
   final String jenisKenari;
   final String keterangan;
-  final String gambarBurung;
+  final String? gambarBurung; // nullable
 
   IndukRequestModel({
     required this.noRing,
@@ -14,7 +14,7 @@ class IndukRequestModel {
     required this.jenisKelamin,
     required this.jenisKenari,
     required this.keterangan,
-    required this.gambarBurung,
+    this.gambarBurung, // nullable constructor param
   });
 
   IndukRequestModel copyWith({
@@ -45,7 +45,7 @@ class IndukRequestModel {
         jenisKelamin: json["jenis_kelamin"],
         jenisKenari: json["jenis_kenari"],
         keterangan: json["keterangan"],
-        gambarBurung: json["gambar_burung"],
+        gambarBurung: json["gambar_burung"], // nullable, can be null
       );
 
   Map<String, dynamic> toJson() => {
@@ -55,6 +55,6 @@ class IndukRequestModel {
     "jenis_kelamin": jenisKelamin,
     "jenis_kenari": jenisKenari,
     "keterangan": keterangan,
-    "gambar_burung": gambarBurung,
+    if (gambarBurung != null) "gambar_burung": gambarBurung,
   };
 }

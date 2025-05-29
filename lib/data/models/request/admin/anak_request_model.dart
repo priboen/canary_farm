@@ -6,7 +6,7 @@ class AnakRequestModel {
   final String jenisKelamin;
   final String jenisKenari;
   final String keterangan;
-  final String gambarBurung;
+  final String? gambarBurung; // nullable
   final int ayahId;
   final int ibuId;
 
@@ -16,7 +16,7 @@ class AnakRequestModel {
     required this.jenisKelamin,
     required this.jenisKenari,
     required this.keterangan,
-    required this.gambarBurung,
+    this.gambarBurung, // nullable constructor param
     required this.ayahId,
     required this.ibuId,
   });
@@ -53,20 +53,25 @@ class AnakRequestModel {
         jenisKelamin: json["jenis_kelamin"],
         jenisKenari: json["jenis_kenari"],
         keterangan: json["keterangan"],
-        gambarBurung: json["gambar_burung"],
-        ayahId: json["ayah-id"],
+        gambarBurung: json["gambar_burung"], // nullable, can be null
+        ayahId: json["ayah_id"],
         ibuId: json["ibu_id"],
       );
 
-  Map<String, dynamic> toJson() => {
-    "no_ring": noRing,
-    "tanggal_lahir":
-        "${tanggalLahir.year.toString().padLeft(4, '0')}-${tanggalLahir.month.toString().padLeft(2, '0')}-${tanggalLahir.day.toString().padLeft(2, '0')}",
-    "jenis_kelamin": jenisKelamin,
-    "jenis_kenari": jenisKenari,
-    "keterangan": keterangan,
-    "gambar_burung": gambarBurung,
-    "ayah-id": ayahId,
-    "ibu_id": ibuId,
-  };
+  Map<String, dynamic> toJson() {
+    final data = {
+      "no_ring": noRing,
+      "tanggal_lahir":
+          "${tanggalLahir.year.toString().padLeft(4, '0')}-${tanggalLahir.month.toString().padLeft(2, '0')}-${tanggalLahir.day.toString().padLeft(2, '0')}",
+      "jenis_kelamin": jenisKelamin,
+      "jenis_kenari": jenisKenari,
+      "keterangan": keterangan,
+      "ayah_id": ayahId,
+      "ibu_id": ibuId,
+    };
+    if (gambarBurung != null) {
+      data["gambar_burung"] = gambarBurung!;
+    }
+    return data;
+  }
 }

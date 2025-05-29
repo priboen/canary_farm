@@ -1,3 +1,4 @@
+import 'package:meta/meta.dart';
 import 'dart:convert';
 
 class BurungSemuaTersediaModel {
@@ -26,14 +27,18 @@ class BurungSemuaTersediaModel {
 
   String toRawJson() => json.encode(toJson());
 
-  factory BurungSemuaTersediaModel.fromJson(Map<String, dynamic> json) =>
-      BurungSemuaTersediaModel(
-        message: json["message"],
-        statusCode: json["status_code"],
-        data: List<DataBurungTersedia>.from(
-          json["data"].map((x) => DataBurungTersedia.fromJson(x)),
-        ),
-      );
+  factory BurungSemuaTersediaModel.fromJson(
+    Map<String, dynamic> json,
+  ) => BurungSemuaTersediaModel(
+    message: json["message"],
+    statusCode: json["status_code"],
+    // data: List<DataBurungTersedia>.from(json["data"].map((x) => DataBurungTersedia.fromJson(x))),
+    data: json["data"] == null
+        ? []
+        : List<DataBurungTersedia>.from(
+            json["data"].map((x) => DataBurungTersedia.fromJson(x)),
+          ),
+  );
 
   Map<String, dynamic> toJson() => {
     "message": message,

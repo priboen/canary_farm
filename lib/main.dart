@@ -1,8 +1,11 @@
 import 'package:canary_farm/data/repository/admin_repository.dart';
+import 'package:canary_farm/data/repository/anak_repository.dart';
 import 'package:canary_farm/data/repository/auth_repository.dart';
+import 'package:canary_farm/data/repository/induk_repository.dart';
+import 'package:canary_farm/presentation/admin/canary/anak/bloc/anak_bloc.dart';
+import 'package:canary_farm/presentation/admin/canary/induk/bloc/induk_bloc.dart';
 import 'package:canary_farm/presentation/admin/profile/bloc/add_profile/add_profile_bloc.dart';
 import 'package:canary_farm/presentation/admin/profile/bloc/get_profile/get_profile_bloc.dart';
-import 'package:canary_farm/presentation/admin/profile/pages/admin_confirm_screen.dart';
 import 'package:canary_farm/data/repository/get_all_burung_tersedia_repository.dart';
 import 'package:canary_farm/data/repository/profile_buyer_repository.dart';
 import 'package:canary_farm/presentation/auth/bloc/login/login_bloc.dart';
@@ -53,13 +56,24 @@ class MyApp extends StatelessWidget {
           create: (context) =>
               GetProfileBloc(AdminRepository(ServiceHttpClient())),
         ),
+        BlocProvider(
+          create: (context) =>
+              GetProfileBloc(AdminRepository(ServiceHttpClient())),
+        ),
+        BlocProvider(
+          create: (context) => IndukBloc(IndukRepository(ServiceHttpClient())),
+        ),
+
+        BlocProvider(
+          create: (context) => AnakBloc(AnakRepository(ServiceHttpClient())),
+        ),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         ),
-        home: const LoginScreen(),
+        home: const Splashscreen(),
       ),
     );
   }

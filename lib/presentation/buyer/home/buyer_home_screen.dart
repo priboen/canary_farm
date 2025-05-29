@@ -117,10 +117,10 @@ class _BuyerHomeScreenState extends State<BuyerHomeScreen> {
                     }
 
                     if (state is GetBurungTersediaLoaded) {
-                      final List<DataBurungTersedia> burungList =
+                      final List<DataBurungTersedia>? burungList =
                           state.burungTersedia.data;
 
-                      if (burungList.isEmpty) {
+                      if (burungList!.isEmpty) {
                         return const Center(
                           child: Text("Tidak ada burung tersedia."),
                         );
@@ -164,7 +164,7 @@ class _BuyerHomeScreenState extends State<BuyerHomeScreen> {
 
                                         // Tambahkan informasi lain yang diperlukan
                                         Text(
-                                          "Deskripsi: ${burung.deskripsi.isNotEmpty ? burung.deskripsi : 'Tidak ada deskripsi'}",
+                                          "Deskripsi: ${burung.deskripsi!.isNotEmpty ? burung.deskripsi : 'Tidak ada deskripsi'}",
                                         ),
                                       ],
                                     ),
@@ -193,9 +193,9 @@ class _BuyerHomeScreenState extends State<BuyerHomeScreen> {
                                     borderRadius: const BorderRadius.vertical(
                                       top: Radius.circular(12),
                                     ),
-                                    child: burung.image.isNotEmpty
+                                    child: burung.image!.isNotEmpty
                                         ? Image.network(
-                                            burung.image,
+                                            burung.image!,
                                             height: 100,
                                             width: double.infinity,
                                             fit: BoxFit.fitHeight,
@@ -217,7 +217,7 @@ class _BuyerHomeScreenState extends State<BuyerHomeScreen> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            burung.noRing,
+                                            burung.noRing!,
                                             style: const TextStyle(
                                               fontWeight: FontWeight.bold,
                                             ),

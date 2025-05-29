@@ -10,7 +10,7 @@ class IndukRepository {
 
   IndukRepository(this._serviceHttpClient);
 
-  Future<Either<String, GetInduk>> addInduk(
+  Future<Either<String, GetIndukById>> addInduk(
     IndukRequestModel requestModel,
   ) async {
     try {
@@ -21,7 +21,7 @@ class IndukRepository {
 
       if (response.statusCode == 201) {
         final jsonResponse = json.decode(response.body);
-        final profileResponse = GetInduk.fromJson(jsonResponse);
+        final profileResponse = GetIndukById.fromJson(jsonResponse);
         return Right(profileResponse);
       } else {
         final errorMessage = json.decode(response.body);

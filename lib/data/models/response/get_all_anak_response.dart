@@ -40,6 +40,46 @@ class GetAllAnakModel {
   };
 }
 
+class GetAnakById {
+  final String message;
+  final int statusCode;
+  final GetAnak data;
+
+  GetAnakById({
+    required this.message,
+    required this.statusCode,
+    required this.data,
+  });
+
+  GetAnakById copyWith({
+    String? message,
+    int? statusCode,
+    GetAnak? data,
+  }) => GetAnakById(
+    message: message ?? this.message,
+    statusCode: statusCode ?? this.statusCode,
+    data: data ?? this.data,
+  );
+
+  factory GetAnakById.fromRawJson(String str) =>
+      GetAnakById.fromJson(json.decode(str));
+
+  String toRawJson() => json.encode(toJson());
+
+  factory GetAnakById.fromJson(Map<String, dynamic> json) =>
+      GetAnakById(
+        message: json["message"],
+        statusCode: json["status_code"],
+        data: GetAnak.fromJson(json["data"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+    "message": message,
+    "status_code": statusCode,
+    "data": data.toJson(),
+  };
+}
+
 class GetAnak {
   final int id;
   final String noRing;

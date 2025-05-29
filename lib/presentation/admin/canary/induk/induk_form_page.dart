@@ -1,6 +1,10 @@
 import 'package:canary_farm/core/core.dart';
+import 'package:canary_farm/data/models/request/admin/induk_request_model.dart';
+import 'package:canary_farm/presentation/admin/admin_main_page.dart';
+import 'package:canary_farm/presentation/admin/canary/induk/bloc/induk_bloc.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class IndukFormPage extends StatefulWidget {
   const IndukFormPage({super.key});
@@ -29,7 +33,7 @@ class _IndukFormPageState extends State<IndukFormPage> {
     'Lokal',
   ];
 
-  final List<String> genderItems = ['Jantan', 'Betina'];
+  final List<String> genderItems = ['jantan', 'betina'];
 
   String? selectedValue;
   String? selectedGender;
@@ -55,6 +59,7 @@ class _IndukFormPageState extends State<IndukFormPage> {
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Form(
+            key: _formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -110,7 +115,9 @@ class _IndukFormPageState extends State<IndukFormPage> {
                     return null;
                   },
                   onChanged: (value) {
-                    //Do something when selected item is changed.
+                    setState(() {
+                      selectedValue = value;
+                    });
                   },
                   onSaved: (value) {
                     selectedValue = value.toString();
@@ -172,7 +179,47 @@ class _IndukFormPageState extends State<IndukFormPage> {
                   validator: 'Keterangan tidak boleh kosong',
                 ),
                 const SpaceHeight(32),
-                Button.filled(onPressed: () {}, label: "Simpan"),
+                BlocConsumer<IndukBloc, IndukState>(
+                  listener: (context, state) {
+                    if (state is IndukAddSuccessState) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text(state.responseModel.message)),
+                      );
+                      context.pushAndRemoveUntil(
+                        const AdminMainPage(),
+                        (route) => false,
+                      );
+                    } else if (state is IndukErrorState) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text(state.errorMessage)),
+                      );
+                    }
+                  },
+                  builder: (context, state) {
+                    return Button.filled(
+                      onPressed: () {
+                        if (_formKey.currentState?.validate() ?? false) {
+                          final indukRequest = IndukRequestModel(
+                            noRing: noRingController.text,
+                            tanggalLahir: DateTime.parse(
+                              tanggalLahirController.text,
+                            ),
+                            jenisKelamin: selectedGender ?? '',
+                            jenisKenari: selectedValue ?? '',
+                            keterangan: keteranganController.text,
+                            gambarBurung:
+                                null, // Assuming image upload is handled elsewhere
+                          );
+
+                          context.read<IndukBloc>().add(
+                            IndukRequestEvent(requestModel: indukRequest),
+                          );
+                        }
+                      },
+                      label: "Simpan",
+                    );
+                  },
+                ),
               ],
             ),
           ),
