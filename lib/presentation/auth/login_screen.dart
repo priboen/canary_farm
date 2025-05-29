@@ -4,6 +4,7 @@ import 'package:canary_farm/presentation/admin/admin_main_page.dart';
 import 'package:canary_farm/presentation/auth/bloc/login/login_bloc.dart';
 import 'package:canary_farm/presentation/auth/register_screen.dart';
 import 'package:canary_farm/presentation/buyer/home/buyer_home_screen.dart';
+import 'package:canary_farm/presentation/buyer/profile/buyer_profile_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -105,7 +106,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         );
                       } else if (role == 'buyer') {
                         context.pushAndRemoveUntil(
-                          const BuyerHomeScreen(),
+                          const BuyerProfilePage(),
                           (route) => false,
                         );
                       } else {

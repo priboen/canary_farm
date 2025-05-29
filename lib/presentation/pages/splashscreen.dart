@@ -2,6 +2,7 @@ import 'package:canary_farm/core/core.dart';
 import 'package:canary_farm/presentation/admin/admin_main_page.dart';
 import 'package:canary_farm/presentation/auth/login_screen.dart';
 import 'package:canary_farm/presentation/buyer/home/buyer_home_screen.dart';
+import 'package:canary_farm/presentation/buyer/profile/buyer_profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
@@ -23,13 +24,13 @@ class _SplashscreenState extends State<Splashscreen> {
         if (role?.toLowerCase() == 'admin') {
           context.pushAndRemoveUntil(const AdminMainPage(), (route) => false);
         } else {
-          context.pushAndRemoveUntil(const BuyerHomeScreen(), (route) => false);
+          context.pushAndRemoveUntil(
+            const BuyerProfilePage(),
+            (route) => false,
+          );
         }
       } else {
-        context.pushAndRemoveUntil(
-          const LoginScreen(),
-          (route) => false,
-        );
+        context.pushAndRemoveUntil(const LoginScreen(), (route) => false);
       }
     });
     return Scaffold(

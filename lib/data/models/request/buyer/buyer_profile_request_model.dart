@@ -7,35 +7,37 @@ class BuyerProfileRequestModel {
   final String? phone;
   final String? photo;
 
-  BuyerProfileRequestModel({
-    required this.name,
-    required this.address,
-    required this.phone,
-    required this.photo,
-  });
+  BuyerProfileRequestModel({this.name, this.address, this.phone, this.photo});
 
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'name': name,
-      'address': address,
-      'phone': phone,
-      'photo': photo,
-    };
-  }
-
-  factory BuyerProfileRequestModel.fromMap(Map<String, dynamic> map) {
+  BuyerProfileRequestModel copyWith({
+    String? name,
+    String? address,
+    String? phone,
+    String? photo,
+  }) {
     return BuyerProfileRequestModel(
-      name: map['name'] != null ? map['name'] as String : null,
-      address: map['address'] != null ? map['address'] as String : null,
-      phone: map['phone'] != null ? map['phone'] as String : null,
-      photo: map['photo'] != null ? map['photo'] as String : null,
+      name: name ?? this.name,
+      address: address ?? this.address,
+      phone: phone ?? this.phone,
+      photo: photo ?? this.photo,
     );
   }
 
-  String toJson() => json.encode(toMap());
+  factory BuyerProfileRequestModel.fromRawJson(String str) =>
+      BuyerProfileRequestModel.fromJson(json.decode(str));
 
-  factory BuyerProfileRequestModel.fromJson(String source) =>
-      BuyerProfileRequestModel.fromMap(
-        json.decode(source) as Map<String, dynamic>,
+  String toRawJson() => json.encode(toJson());
+  factory BuyerProfileRequestModel.fromJson(Map<String, dynamic> json) =>
+      BuyerProfileRequestModel(
+        name: json["name"],
+        address: json["address"],
+        phone: json["phone"],
+        photo: json["photo"],
       );
+  Map<String, dynamic> toJson() => {
+    "name": name,
+    "address": address,
+    "phone": phone,
+    "photo": photo,
+  };
 }
