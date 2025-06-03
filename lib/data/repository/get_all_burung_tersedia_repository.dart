@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:canary_farm/data/models/response/buyer/burung_semua_tersedia_model.dart';
+import 'package:canary_farm/data/models/response/burung_semua_tersedia_model.dart';
 import 'package:canary_farm/services/service_http_client.dart';
 import 'package:dartz/dartz.dart';
 
@@ -12,7 +12,7 @@ class GetAllBurungTersediaRepository {
   Future<Either<String, BurungSemuaTersediaModel>>
   getAllBurungTersedia() async {
     try {
-      final response = await httpClient.get("buyer/burung-semua-tersedia");
+      final response = await httpClient.get("burung-semua-tersedia");
 
       if (response.statusCode == 200) {
         final jsonResponse = json.decode(response.body);

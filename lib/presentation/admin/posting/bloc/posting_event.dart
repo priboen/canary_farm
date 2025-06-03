@@ -7,3 +7,5 @@ class PostingRequestEvent extends PostingEvent {
 
   PostingRequestEvent({required this.requestModel});
 }
+
+class GetAllBurungPostingEvent extends PostingEvent {}

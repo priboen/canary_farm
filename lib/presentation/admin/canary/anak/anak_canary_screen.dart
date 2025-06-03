@@ -93,11 +93,12 @@ class _AnakCanaryScreenState extends State<AnakCanaryScreen> {
         },
       ),
       floatingActionButton: FloatingActionButton(
+        heroTag: 'add_child_canary',
         onPressed: () {
           context.push(const AnakCanaryFormScreen());
         },
-        child: const Icon(Icons.add),
         backgroundColor: AppColors.primary,
+        child: const Icon(Icons.add),
       ),
     );
   }
