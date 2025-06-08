@@ -1,4 +1,4 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:canary_farm/data/models/request/auth/register_request_model.dart';
 import 'package:canary_farm/data/repository/auth_repository.dart';
 
@@ -21,7 +21,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
 
     result.fold(
       (l) => emit(RegisterFailure(error: l)),
-      (r) => emit(RegisterSuccess(message:  r)),
+      (r) => emit(RegisterSuccess(message: r)),
     );
   }
 }

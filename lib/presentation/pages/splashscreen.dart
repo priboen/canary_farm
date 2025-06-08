@@ -17,7 +17,10 @@ class Splashscreen extends StatelessWidget {
           if (state.role == 'admin') {
             context.pushAndRemoveUntil(const AdminMainPage(), (_) => false);
           } else {
-            context.pushAndRemoveUntil(const BuyerProfilePage(), (_) => false);
+            context.pushAndRemoveUntil(
+              const BuyerProfileScreen(),
+              (_) => false,
+            );
           }
         } else if (state is SplashUnauthenticated) {
           context.pushAndRemoveUntil(const LoginScreen(), (_) => false);

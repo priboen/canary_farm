@@ -1,4 +1,4 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:canary_farm/data/repository/profile_admin_repository.dart';
 import 'package:canary_farm/data/repository/profile_buyer_repository.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';

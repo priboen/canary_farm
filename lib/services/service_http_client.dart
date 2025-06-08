@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
@@ -78,12 +79,12 @@ class ServiceHttpClient {
     Map<String, dynamic>? body,
     http.Response response,
   ) {
-    print("==== HTTP REQUEST ====");
-    print("Method: $method");
-    print("URL: $url");
-    if (body != null) print("Body: ${jsonEncode(body)}");
-    print("Status Code: ${response.statusCode}");
-    print("Response Body: ${response.body}");
-    print("======================");
+    log("==== HTTP REQUEST ====");
+    log("Method: $method");
+    log("URL: $url");
+    if (body != null) log("Body: ${jsonEncode(body)}");
+    log("Status Code: ${response.statusCode}");
+    log("Response Body: ${response.body}");
+    log("======================");
   }
 }

@@ -100,6 +100,7 @@ class GetAllBurung {
   };
 }
 
+// ignore: constant_identifier_names
 enum JenisKelamin { BETINA, JANTAN }
 
 final jenisKelaminValues = EnumValues({
@@ -107,6 +108,7 @@ final jenisKelaminValues = EnumValues({
   "jantan": JenisKelamin.JANTAN,
 });
 
+// ignore: constant_identifier_names
 enum JenisKenari { AF_MEDIUM, LOCAL, YS }
 
 final jenisKenariValues = EnumValues({
@@ -115,6 +117,7 @@ final jenisKenariValues = EnumValues({
   "YS": JenisKenari.YS,
 });
 
+// ignore: constant_identifier_names
 enum Tipe { ANAK, INDUK }
 
 final tipeValues = EnumValues({"anak": Tipe.ANAK, "induk": Tipe.INDUK});

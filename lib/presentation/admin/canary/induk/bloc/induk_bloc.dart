@@ -1,7 +1,7 @@
-import 'package:bloc/bloc.dart';
 import 'package:canary_farm/data/models/request/admin/induk_request_model.dart';
 import 'package:canary_farm/data/models/response/get_all_induk_response.dart';
 import 'package:canary_farm/data/repository/induk_repository.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'induk_event.dart';
 part 'induk_state.dart';

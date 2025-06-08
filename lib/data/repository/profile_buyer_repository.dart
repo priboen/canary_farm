@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:nativewrappers/_internal/vm/lib/developer.dart';
 
 import 'package:canary_farm/data/models/request/buyer/buyer_profile_request_model.dart';
 import 'package:canary_farm/data/models/response/buyer/buyer_profile_response_model.dart';
@@ -42,7 +43,7 @@ class ProfileBuyerRepository {
         final profileResponse = BuyerProfileResponseModel.fromJson(
           jsonResponse,
         );
-        print("Profile Response: $profileResponse");
+        log("Profile Response: $profileResponse");
         return Right(profileResponse);
       } else {
         final errorMessage = json.decode(response.body);

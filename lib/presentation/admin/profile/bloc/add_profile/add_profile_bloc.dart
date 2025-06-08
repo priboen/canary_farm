@@ -1,4 +1,4 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:canary_farm/data/models/request/admin/admin_profile_request.dart';
 import 'package:canary_farm/data/models/response/admin_profile_response_model.dart';
 import 'package:canary_farm/data/repository/profile_admin_repository.dart';
