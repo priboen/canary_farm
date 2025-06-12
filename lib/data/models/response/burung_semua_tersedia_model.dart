@@ -138,17 +138,16 @@ class DataBurungTersedia {
 
   factory DataBurungTersedia.fromJson(Map<String, dynamic> json) =>
       DataBurungTersedia(
-        id: json["id"],
-        image: json["image"],
-        noRing: json["no_ring"],
-        jenisKelamin: json["jenis_kelamin"],
-        usia: json["usia"],
-        jenisKenari: json["jenis_kenari"],
-        harga: json["harga"],
-        deskripsi: json["deskripsi"],
-        status: json["status"],
+        id: json["id"] ?? 0,
+        image: json["image"] ?? '',
+        noRing: json["no_ring"] ?? '',
+        jenisKelamin: json["jenis_kelamin"] ?? '',
+        usia: json["usia"] ?? '',
+        jenisKenari: json["jenis_kenari"] ?? '',
+        harga: json["harga"] ?? 0,
+        deskripsi: json["deskripsi"] ?? '',
+        status: json["status"] ?? '',
       );
-
   Map<String, dynamic> toJson() => {
     "id": id,
     "image": image,
