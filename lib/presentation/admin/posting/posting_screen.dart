@@ -93,7 +93,7 @@ class _PostingScreenState extends State<PostingScreen> {
                                 mainAxisSpacing: 10,
                                 crossAxisSpacing: 10,
                                 childAspectRatio:
-                                    0.8, // rasio aspek untuk kartu
+                                    0.75, // rasio aspek untuk kartu
                               ),
                           itemBuilder: (context, index) {
                             final burung = burungList[index];

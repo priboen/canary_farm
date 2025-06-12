@@ -11,6 +11,7 @@ class PostingFormPage extends StatefulWidget {
 }
 
 class _PostingFormPageState extends State<PostingFormPage> {
+  String? selectedKey; // format: "id-type"
   int? selectedBurungId;
   String? selectedBurungType;
   final TextEditingController hargaController = TextEditingController();
@@ -45,24 +46,33 @@ class _PostingFormPageState extends State<PostingFormPage> {
           }
 
           if (state is GetAllBurungState) {
+            final data = state.responseModel.data;
+
             return Padding(
               padding: const EdgeInsets.all(16.0),
-              child: Column(
+              child: ListView(
                 children: [
-                  DropdownButtonFormField<int>(
-                    value: selectedBurungId,
+                  DropdownButtonFormField<String>(
+                    value: selectedKey,
                     decoration: const InputDecoration(
                       labelText: 'Pilih Burung',
                     ),
-                    items: state.responseModel.data.map((burung) {
-                      return DropdownMenuItem<int>(
-                        value: burung.id,
+                    items: data.map((burung) {
+                      final key = '${burung.id}-${burung.tipe.name}';
+                      return DropdownMenuItem<String>(
+                        value: key,
                         child: Text('${burung.noRing} - ${burung.tipe.name}'),
-                        onTap: () => selectedBurungType = burung.tipe.name,
+                        onTap: () {
+                          selectedBurungId = burung.id;
+                          selectedBurungType = burung.tipe.name;
+                        },
                       );
                     }).toList(),
-                    onChanged: (value) =>
-                        setState(() => selectedBurungId = value),
+                    onChanged: (value) {
+                      setState(() {
+                        selectedKey = value;
+                      });
+                    },
                   ),
                   const SizedBox(height: 16),
                   TextField(
