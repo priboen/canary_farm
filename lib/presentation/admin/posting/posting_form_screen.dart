@@ -16,6 +16,7 @@ class _PostingFormPageState extends State<PostingFormPage> {
   String? selectedBurungType;
   final TextEditingController hargaController = TextEditingController();
   final TextEditingController deskripsiController = TextEditingController();
+  final key = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -33,7 +34,7 @@ class _PostingFormPageState extends State<PostingFormPage> {
             ScaffoldMessenger.of(
               context,
             ).showSnackBar(SnackBar(content: Text(state.burung.message)));
-            Navigator.pop(context);
+            Navigator.pop(context, true);
           } else if (state is PostingFailure) {
             ScaffoldMessenger.of(
               context,
@@ -50,69 +51,80 @@ class _PostingFormPageState extends State<PostingFormPage> {
 
             return Padding(
               padding: const EdgeInsets.all(16.0),
-              child: ListView(
-                children: [
-                  DropdownButtonFormField<String>(
-                    value: selectedKey,
-                    decoration: const InputDecoration(
-                      labelText: 'Pilih Burung',
-                    ),
-                    items: data.map((burung) {
-                      final key = '${burung.id}-${burung.tipe.name}';
-                      return DropdownMenuItem<String>(
-                        value: key,
-                        child: Text('${burung.noRing} - ${burung.tipe.name}'),
-                        onTap: () {
-                          selectedBurungId = burung.id;
-                          selectedBurungType = burung.tipe.name;
-                        },
-                      );
-                    }).toList(),
-                    onChanged: (value) {
-                      setState(() {
-                        selectedKey = value;
-                      });
-                    },
-                  ),
-                  const SizedBox(height: 16),
-                  TextField(
-                    controller: hargaController,
-                    keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(labelText: 'Harga'),
-                  ),
-                  const SizedBox(height: 16),
-                  TextField(
-                    controller: deskripsiController,
-                    decoration: const InputDecoration(labelText: 'Deskripsi'),
-                    maxLines: 3,
-                  ),
-                  const SizedBox(height: 24),
-                  ElevatedButton(
-                    onPressed: () {
-                      if (selectedBurungId == null ||
-                          selectedBurungType == null ||
-                          hargaController.text.isEmpty ||
-                          deskripsiController.text.isEmpty) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Lengkapi semua field')),
+              child: Form(
+                key: key,
+                child: ListView(
+                  children: [
+                    DropdownButtonFormField<String>(
+                      value: selectedKey,
+                      decoration: const InputDecoration(
+                        labelText: 'Pilih Burung',
+                      ),
+                      items: data.map((burung) {
+                        final key = '${burung.id}-${burung.tipe.name}';
+                        return DropdownMenuItem<String>(
+                          value: key,
+                          child: Text('${burung.noRing} - ${burung.tipe.name}'),
+                          onTap: () {
+                            selectedBurungId = burung.id;
+                            selectedBurungType = burung.tipe.name;
+                          },
                         );
-                        return;
-                      }
+                      }).toList(),
+                      onChanged: (value) {
+                        setState(() {
+                          selectedKey = value;
+                        });
+                      },
+                    ),
+                    const SizedBox(height: 16),
+                    TextFormField(
+                      controller: hargaController,
+                      keyboardType: TextInputType.number,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Harga tidak boleh kosong';
+                        }
+                        final harga = int.tryParse(value);
+                        if (harga == null || harga <= 0) {
+                          return 'Harga harus berupa angka positif';
+                        }
+                        return null;
+                      },
+                      decoration: const InputDecoration(labelText: 'Harga'),
+                    ),
+                    const SizedBox(height: 16),
+                    TextFormField(
+                      controller: deskripsiController,
+                      decoration: const InputDecoration(labelText: 'Deskripsi'),
+                      maxLines: 3,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Deskripsi tidak boleh kosong';
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(height: 24),
+                    ElevatedButton(
+                      onPressed: () async {
+                        if (key.currentState?.validate() ?? false) {
+                          final request = PostingJualRequestModel(
+                            burungId: selectedBurungId!,
+                            burungType: selectedBurungType!.toLowerCase(),
+                            harga: int.parse(hargaController.text),
+                            deskripsi: deskripsiController.text,
+                          );
 
-                      final request = PostingJualRequestModel(
-                        burungId: selectedBurungId!,
-                        burungType: selectedBurungType!.toLowerCase(),
-                        harga: int.parse(hargaController.text),
-                        deskripsi: deskripsiController.text,
-                      );
-
-                      context.read<PostingBloc>().add(
-                        PostingRequestEvent(requestModel: request),
-                      );
-                    },
-                    child: const Text('Posting'),
-                  ),
-                ],
+                          context.read<PostingBloc>().add(
+                            PostingRequestEvent(requestModel: request),
+                          );
+                        }
+                      },
+                      child: const Text('Posting'),
+                    ),
+                  ],
+                ),
               ),
             );
           }

@@ -132,7 +132,7 @@ class _BuyerHomeScreenState extends State<BuyerHomeScreen> {
                               crossAxisCount: 2, // 2 kolom
                               mainAxisSpacing: 10,
                               crossAxisSpacing: 10,
-                              childAspectRatio: 0.8, // rasio aspek untuk kartu
+                              childAspectRatio: 0.75, // rasio aspek untuk kartu
                             ),
                         itemBuilder: (context, index) {
                           final burung = burungList[index];

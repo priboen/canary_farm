@@ -226,10 +226,17 @@ class _PostingScreenState extends State<PostingScreen> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // Navigate to posting form screen
-          context.push(const PostingFormPage());
+        onPressed: () async {
+          final result = await context.push(const PostingFormPage());
+
+          // Jika form berhasil dan ada return value (misalnya true), refresh list
+          if (result == true) {
+            context.read<GetBurungTersediaBloc>().add(
+              GetAllBurungTersediaEvent(),
+            );
+          }
         },
+
         backgroundColor: Colors.blue,
         child: const Icon(Icons.add, color: Colors.white),
       ),
