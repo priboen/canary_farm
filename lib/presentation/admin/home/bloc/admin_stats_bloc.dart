@@ -29,9 +29,20 @@ class AdminStatsBloc extends Bloc<AdminStatsEvent, AdminStatsState> {
     if (indukResult.isRight() &&
         anakResult.isRight() &&
         burungResult.isRight()) {
-      final indukCount = indukResult.getOrElse(() => throw {}).data.length;
-      final anakCount = anakResult.getOrElse(() => throw {}).data.length;
-      final burungCount = burungResult.getOrElse(() => throw {}).data.length;
+      final indukCount = indukResult.fold(
+        (_) => 0,
+        (r) => r.data.isEmpty ? 0 : r.data.length,
+      );
+
+      final anakCount = anakResult.fold(
+        (_) => 0,
+        (r) => r.data.isEmpty ? 0 : r.data.length,
+      );
+
+      final burungCount = burungResult.fold(
+        (_) => 0,
+        (r) => r.data.isEmpty ? 0 : r.data.length,
+      );
 
       emit(
         AdminStatsSuccess(
