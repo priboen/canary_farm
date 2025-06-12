@@ -4,14 +4,14 @@ import 'package:canary_farm/presentation/buyer/profile/widget/profile_view_buyer
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class BuyerProfilePage extends StatefulWidget {
-  const BuyerProfilePage({super.key});
+class BuyerProfileScreen extends StatefulWidget {
+  const BuyerProfileScreen({super.key});
 
   @override
-  State<BuyerProfilePage> createState() => _BuyerProfilePageState();
+  State<BuyerProfileScreen> createState() => _BuyerProfileScreenState();
 }
 
-class _BuyerProfilePageState extends State<BuyerProfilePage> {
+class _BuyerProfileScreenState extends State<BuyerProfileScreen> {
   @override
   initState() {
     super.initState();

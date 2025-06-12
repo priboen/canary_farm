@@ -7,11 +7,11 @@ import 'package:canary_farm/services/service_http_client.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-class AdminRepository {
+class PrifileAdminRepository {
   final ServiceHttpClient _serviceHttpClient;
   final secureStorage = FlutterSecureStorage();
 
-  AdminRepository(this._serviceHttpClient);
+  PrifileAdminRepository(this._serviceHttpClient);
 
   Future<Either<String, AdminProfileResponseModel>> addProfile(
     AdminProfileRequestModel requestModel,

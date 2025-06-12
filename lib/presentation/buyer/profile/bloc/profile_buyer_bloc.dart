@@ -1,4 +1,4 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:canary_farm/data/models/request/buyer/buyer_profile_request_model.dart';
 import 'package:canary_farm/data/models/response/buyer/buyer_profile_response_model.dart';
 import 'package:canary_farm/data/repository/profile_buyer_repository.dart';

@@ -1,4 +1,3 @@
-import 'package:canary_farm/core/components/components.dart';
 import 'package:canary_farm/core/core.dart';
 import 'package:canary_farm/data/models/request/admin/admin_profile_request.dart';
 import 'package:canary_farm/presentation/admin/admin_main_page.dart';

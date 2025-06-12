@@ -1,8 +1,7 @@
 import 'package:canary_farm/core/components/spaces.dart';
-import 'package:canary_farm/core/extensions/build_context_ext.dart';
-import 'package:canary_farm/data/models/response/buyer/burung_semua_tersedia_model.dart';
+import 'package:canary_farm/data/models/response/burung_semua_tersedia_model.dart';
 import 'package:canary_farm/presentation/auth/login_screen.dart';
-import 'package:canary_farm/presentation/buyer/home/bloc/get_burung_tersedia_bloc.dart';
+import 'package:canary_farm/presentation/bloc/get_all_burung_tersedia/get_burung_tersedia_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -117,10 +116,10 @@ class _BuyerHomeScreenState extends State<BuyerHomeScreen> {
                     }
 
                     if (state is GetBurungTersediaLoaded) {
-                      final List<DataBurungTersedia>? burungList =
+                      final List<DataBurungTersedia> burungList =
                           state.burungTersedia.data;
 
-                      if (burungList!.isEmpty) {
+                      if (burungList.isEmpty) {
                         return const Center(
                           child: Text("Tidak ada burung tersedia."),
                         );
@@ -164,7 +163,7 @@ class _BuyerHomeScreenState extends State<BuyerHomeScreen> {
 
                                         // Tambahkan informasi lain yang diperlukan
                                         Text(
-                                          "Deskripsi: ${burung.deskripsi!.isNotEmpty ? burung.deskripsi : 'Tidak ada deskripsi'}",
+                                          "Deskripsi: ${burung.deskripsi.isNotEmpty ? burung.deskripsi : 'Tidak ada deskripsi'}",
                                         ),
                                       ],
                                     ),
@@ -193,9 +192,9 @@ class _BuyerHomeScreenState extends State<BuyerHomeScreen> {
                                     borderRadius: const BorderRadius.vertical(
                                       top: Radius.circular(12),
                                     ),
-                                    child: burung.image!.isNotEmpty
+                                    child: burung.image.isNotEmpty
                                         ? Image.network(
-                                            burung.image!,
+                                            burung.image,
                                             height: 100,
                                             width: double.infinity,
                                             fit: BoxFit.fitHeight,
@@ -217,7 +216,7 @@ class _BuyerHomeScreenState extends State<BuyerHomeScreen> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            burung.noRing!,
+                                            burung.noRing,
                                             style: const TextStyle(
                                               fontWeight: FontWeight.bold,
                                             ),

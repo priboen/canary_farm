@@ -1,4 +1,4 @@
-import 'package:canary_farm/data/models/response/buyer/burung_semua_tersedia_model.dart';
+import 'package:canary_farm/data/models/response/burung_semua_tersedia_model.dart';
 import 'package:canary_farm/data/repository/get_all_burung_tersedia_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

@@ -1,6 +1,7 @@
 import 'package:canary_farm/core/assets/assets.gen.dart';
 import 'package:canary_farm/core/core.dart';
 import 'package:canary_farm/presentation/admin/canary/induk/bloc/induk_bloc.dart';
+import 'package:canary_farm/presentation/admin/canary/induk/induk_detail_screen.dart';
 import 'package:canary_farm/presentation/admin/canary/induk/induk_form_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -73,12 +74,6 @@ class _IndukCanaryScreenState extends State<IndukCanaryScreen> {
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                           const Spacer(),
-                          TextButton(
-                            onPressed: () {
-                              context.push(const IndukFormPage());
-                            },
-                            child: const Text("Lihat Semua"),
-                          ),
                         ],
                       ),
                       const SpaceHeight(16.0),
@@ -91,6 +86,9 @@ class _IndukCanaryScreenState extends State<IndukCanaryScreen> {
                         itemBuilder: (context, index) {
                           final induk = data[index];
                           return ListTile(
+                            onTap: () {
+                              context.push(IndukDetailScreen(data: induk));
+                            },
                             leading: CircleAvatar(
                               radius: 20,
                               backgroundImage:
@@ -119,6 +117,17 @@ class _IndukCanaryScreenState extends State<IndukCanaryScreen> {
             ),
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        heroTag: 'tambah-induk-burung',
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const IndukFormPage()),
+          );
+        },
+        backgroundColor: AppColors.primary,
+        child: const Icon(Icons.add, color: AppColors.lightSheet),
       ),
     );
   }

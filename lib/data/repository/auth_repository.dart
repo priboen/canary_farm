@@ -56,7 +56,7 @@ class AuthRepository {
       final jsonResponse = json.decode(response.body);
       if (response.statusCode == 201) {
         final registerResponse = jsonResponse['message'] as String;
-        log("Registration successful: ${registerResponse}");
+        log("Registration successful: $registerResponse");
         return Right(registerResponse);
       } else {
         log("Registration failed: ${jsonResponse['message']}");

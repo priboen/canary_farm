@@ -1,8 +1,8 @@
 import 'package:canary_farm/core/constants/constants.dart';
 import 'package:canary_farm/presentation/admin/canary/anak/anak_canary_screen.dart';
-import 'package:canary_farm/presentation/admin/canary/induk_canary_screen.dart';
+import 'package:canary_farm/presentation/admin/canary/induk/induk_canary_screen.dart';
 import 'package:canary_farm/presentation/admin/home/admin_home_screen.dart';
-import 'package:canary_farm/presentation/admin/profile/pages/admin_profile_screen.dart';
+import 'package:canary_farm/presentation/admin/posting/posting_screen.dart';
 import 'package:flutter/material.dart';
 
 class AdminMainPage extends StatefulWidget {
@@ -18,7 +18,7 @@ class _AdminMainPageState extends State<AdminMainPage> {
     const AdminHomeScreen(),
     const IndukCanaryScreen(),
     const AnakCanaryScreen(),
-    const Center(child: Text('Posting')),
+    const PostingScreen(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -43,21 +43,22 @@ class _AdminMainPageState extends State<AdminMainPage> {
             highlightColor: Colors.transparent,
           ),
           child: BottomNavigationBar(
+            backgroundColor: AppColors.primary,
             useLegacyColorScheme: false,
             currentIndex: _selectedIndex,
             onTap: (value) => setState(() {
               _selectedIndex = value;
             }),
             type: BottomNavigationBarType.fixed,
-            selectedLabelStyle: const TextStyle(color: AppColors.primary),
-            selectedIconTheme: const IconThemeData(color: AppColors.primary),
+            selectedLabelStyle: const TextStyle(color: AppColors.lightSheet),
+            selectedIconTheme: const IconThemeData(color: AppColors.lightSheet),
             elevation: 0,
             items: [
               BottomNavigationBarItem(
                 icon: Icon(
                   Icons.home,
                   color: _selectedIndex == 0
-                      ? AppColors.primary
+                      ? AppColors.lightSheet
                       : AppColors.grey,
                 ),
                 label: 'Home',
@@ -66,7 +67,7 @@ class _AdminMainPageState extends State<AdminMainPage> {
                 icon: Icon(
                   Icons.pets,
                   color: _selectedIndex == 1
-                      ? AppColors.primary
+                      ? AppColors.lightSheet
                       : AppColors.grey,
                 ),
                 label: 'Induk',
@@ -75,7 +76,7 @@ class _AdminMainPageState extends State<AdminMainPage> {
                 icon: Icon(
                   Icons.post_add,
                   color: _selectedIndex == 2
-                      ? AppColors.primary
+                      ? AppColors.lightSheet
                       : AppColors.grey,
                 ),
                 label: 'Anak',
@@ -84,7 +85,7 @@ class _AdminMainPageState extends State<AdminMainPage> {
                 icon: Icon(
                   Icons.person,
                   color: _selectedIndex == 3
-                      ? AppColors.primary
+                      ? AppColors.lightSheet
                       : AppColors.grey,
                 ),
                 label: 'Posting',
